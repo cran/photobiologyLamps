@@ -4,31 +4,38 @@
 \name{photobiologyLamps-package}
 \alias{photobiologyLamps}
 \alias{photobiologyLamps-package}
-\title{Spectral Data of Light Emission by Lamps}
+\title{photobiologyLamps: Spectral Irradiance Data for Lamps}
 \description{
 Spectral emission data for some frequently used lamps excluding
-LEDs. Original data for incandescent and different types of discharge lamps
-are included.
+led emitting diodes (LEDs) available as electronic components. Original
+spectral irradiance data for incandescent-, LED- and discharge lamps are
+included. They are complemented by data on the effect of temperature on
+the emission by fluorescent tubes.
 }
 \details{
-This package contains emission spectra for different types of lamps other
-than LEDs. Measured with an assortment of different instruments over more
-than 20 years in our lab or by collaborators. Some of the lamp types are no
-longer in production but the data are relevant for the interpretation of old
-scientific publications. Data for lamps emitting in the UV and VIS regions of
-the spectrum are represented in these data sets. In addition a set of
-spectral emission for UVB lamps exposed to different ambient temperatures is
-include.
+This package contains emission spectra for different types of lamps
+including LED lamps sold as fully assembled light bulbs or luminaires but
+excluding LEDs sold as components requiring separate electronic driver
+modules or circuits. Lamps have been measured with an assortment of different
+instruments over more than 25 years in our lab or by collaborators. Some of
+the lamp types are no longer in production but the data are relevant for the
+interpretation of old scientific publications. Data for lamps emitting in the
+UV and VIS regions of the spectrum are represented in these data sets. In
+addition a set of spectral emission for UVB lamps exposed to different
+ambient temperatures is include.
 
-The package contains one collection of spectra for different lamps all of
+The package contains two collections of spectra for different lamps all of
 them measured at air temperatures between 20 C and 25 C and a series of
 vectors to be used as indexes to extract different subsets of spectra. These
 spectral data are normalized to spectral energy irradiance equal one at
 their maximum (strongest emission peak).
 
-The temperature response data is included as a separate collection of
+Temperature response data is included as a separate collection of
 spectra both as a \code{source_mspct} object and as a \code{source_spct}
 object.
+
+A third collection of spectra contains data for the 16 different _colors_ of 
+light emitted by a household four channel LED bulb.
 }
 \section{Warning!}{
 
@@ -49,6 +56,7 @@ other lamps of the same exact type should not be expected. This is specially
 true for those data measured more than a few years ago when compared to lamps
 being currently sold under the same type denomination.
 }
+
 \examples{
 library(photobiologyLamps)
 library(photobiologyWavebands)
@@ -58,7 +66,19 @@ lamps.mspct[["incandescent.60w"]]
 # using one spectrum in a calculation
 q_ratio(lamps.mspct$incandescent.60w, Blue(), Green())
 # extracting all the spectra measured with a given instrument
-lamps.mspct[bentham]
+lamps.mspct[bentham_lamps]
 
 }
+\seealso{
+Packages \code{\link[photobiology]{photobiology-package}} and 
+\code{\link[ggspectra]{ggspectra-package}}.
+}
+\author{
+\strong{Maintainer}: Pedro J. Aphalo \email{pedro.aphalo@helsinki.fi} (https://orcid.org/0000-0003-3385-972X)
 
+Other contributors:
+\itemize{
+  \item Lasse Ylianttila [contributor]
+}
+
+}

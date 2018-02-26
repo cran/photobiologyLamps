@@ -15,7 +15,9 @@ A collection of lamp emission spectra measured with different
 }
 \details{
 The \code{"source_mspct"} object contains \code{"source_spct"}
-  objects with spectral emission data.
+  objects with spectral emission data. These classes are defined in
+  package \code{\link[photobiology]{photobiology-package}} together with
+  corresponding methods and functions.
 
   The variables in each member spectrum are as follows: \itemize{ \item
   w.length (nm) \item s.e.irrad (relative energy based units) }
@@ -24,11 +26,17 @@ The \code{"source_mspct"} object contains \code{"source_spct"}
 Please see the help corresponding to each instrument for details.
 }
 \examples{
+uv_lamps
+union(qpanel_lamps, uv_lamps)
+lamps.mspct[union(philips_lamps, red_lamps)]
+
 lamps.mspct$qpanel.uvb313
+
 }
 \seealso{
-\code{\link{bentham}}, \code{\link{licor}}, \code{\link{macam}},
-  \code{\link{oo_maya}}
+\code{\link{bentham_lamps}}, \code{\link{licor_lamps}}, \code{\link{macam_lamps}},
+  \code{\link{oo_maya_lamps}} for information on the spectroradiometers, and
+  \code{\link[photobiologyLEDs]{photobiologyLEDs-package}} for spectra for LEDs available
+  as electronic components.
 }
 \keyword{datasets}
-
