@@ -6,11 +6,12 @@
 \alias{photobiologyLamps-package}
 \title{photobiologyLamps: Spectral Irradiance Data for Lamps}
 \description{
-Spectral emission data for some frequently used lamps excluding
-led emitting diodes (LEDs) available as electronic components. Original
-spectral irradiance data for incandescent-, LED- and discharge lamps are
-included. They are complemented by data on the effect of temperature on
-the emission by fluorescent tubes.
+Spectral emission data for some frequently used lamps excluding 
+    led emitting diodes (LEDs) available as electronic components. Original 
+    spectral irradiance data for incandescent-, LED- and discharge lamps are 
+    included. They are complemented by data on the effect of temperature on
+    the emission by fluorescent tubes. Part of the 'r4photobiology' suite, 
+    Aphalo P. J. (2015) <doi:10.19232/uv4pb.2015.1.14>.
 }
 \details{
 This package contains emission spectra for different types of lamps
@@ -68,6 +69,10 @@ q_ratio(lamps.mspct$incandescent.60w, Blue(), Green())
 # extracting all the spectra measured with a given instrument
 lamps.mspct[bentham_lamps]
 
+}
+\references{
+Aphalo, Pedro J. (2015) The r4photobiology suite. UV4Plants Bulletin, 2015:1,
+21-29. \url{https://doi.org/10.19232/uv4pb.2015.1.14}.
 }
 \seealso{
 Packages \code{\link[photobiology]{photobiology-package}} and 

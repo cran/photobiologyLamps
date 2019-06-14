@@ -60,7 +60,7 @@ Instrument used: Ocean Optics Maya2000 Pro single-monochromator array
 }
 \section{Acknowledgements}{
 
-We thank Prof. Lars Olof Björn for the gift of the lamp.
+We thank Prof. Lars Olof Bjoern for the gift of the lamp.
 }
 
 \examples{

@@ -116,7 +116,7 @@
 #' @examples 
 #' toshiba_lamps
 #' 
-#' @references \url{https://www.toshiba.eu/lighting/en}
+#' @references \url{https://www.uot-toshibalighting.eu/}
 #' 
 #' @seealso \code{\link{lamps.mspct}}
 #' 
@@ -145,11 +145,53 @@
 #' 
 "aputure_lamps"
 
+#' Spectral data for lamps supplied by Sunwayfoto
+#' 
+#' Names of datasets containing the wavelengths and tabulated values spectral emittance 
+#' for photography and video lamps from Sunwayfoto 
+#' Data are normalized to one at the wavelength of maximum emission.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format A vector of character strings.
+#' 
+#' @examples 
+#' sunwayfoto_lamps
+#' 
+#' @references \url{https://www.aputure.com/}
+#' 
+#' @seealso \code{\link{lamps.mspct}}
+#' 
+#' @family manufacturers
+#' 
+"sunwayfoto_lamps"
+
+#' Spectral data for lamps supplied by Godox
+#' 
+#' Names of datasets containing the wavelengths and tabulated values spectral emittance 
+#' for photography lamps and flashes from Godox 
+#' Data are normalized to one at the wavelength of maximum emission.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format A vector of character strings.
+#' 
+#' @examples 
+#' godox_lamps
+#' 
+#' @references \url{https://www.aputure.com/}
+#' 
+#' @seealso \code{\link{lamps.mspct}}
+#' 
+#' @family manufacturers
+#' 
+"godox_lamps"
+
 #' Spectral data for lamps supplied by Valoya
 #' 
 #' Names of datasets containing the wavelengths and tabulated values spectral emittance 
-#' for photography and video lamps from Valoya 
-#' Data are normalized to one at the wavelength of maximum emission.
+#' for plant grow lamps from Valoya Oy (Finland).
+#' Data measured by the author are normalized to one at the wavelength of maximum emission.
 #' 
 #' @docType data
 #' @keywords datasets
@@ -165,6 +207,27 @@
 #' @family manufacturers
 #' 
 "valoya_lamps"
+
+#' Spectral data for lamps supplied by Osram-Fluence
+#' 
+#' Names of datasets containing the wavelengths and tabulated values spectral emittance 
+#' for plant grow lamps from Fluence (Osram).
+#' Data digitized from manufacturer's brochure are normalized to one at the wavelength of maximum emission.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format A vector of character strings.
+#' 
+#' @examples 
+#' fluence_lamps
+#' 
+#' @references \url{https://fluence.science/}
+#' 
+#' @seealso \code{\link{lamps.mspct}}
+#' 
+#' @family manufacturers
+#' 
+"fluence_lamps"
 
 #' Spectral data for shop-branded lamps 
 #' 

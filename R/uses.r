@@ -1,7 +1,7 @@
-#' Spectral data for Lamps of different types
+#' Spectral data for Lamps designed for specific uses
 #' 
 #' Names of datasets containing the wavelengths and tabulated values spectral emittance 
-#' for the lamps of different types. 
+#' for the lamps grouped by special use. 
 #' 
 #' @note In the case of LED-based lamps we include here only ready built commercially 
 #' available lamps.
@@ -9,38 +9,24 @@
 #' spectral output. For emission spectra for LEDs available as electronic components
 #' please see \code{\link[photobiologyLEDs]{photobiologyLEDs-package}}.
 #' 
-#' @aliases types
+#' @aliases uses
 #' 
 #' @docType data
 #' @keywords datasets
 #' @format A vector of character strings.
 #' 
-#' @aliases sodium_lamps mercury_lamps multimetal_lamps led_lamps
+#' @aliases plant_grow_lamps photography_lamps
 #' 
 #' @examples 
-#' sodium_lamps
-#' multimetal_lamps
-#' mercury_lamps
-#' led_lamps
+#' plant_grow_lamps
+#' photography_lamps
 #' 
-#' # select lamps emitting in the amber, yellow, orange region
-#' lamps.mspct[sodium_lamps]
+#' # select lamps for photography
+#' lamps.mspct[photography_lamps]
 #' 
 #' @seealso \code{\link{lamps.mspct}}
 #' 
-"incandescent_lamps"
+"photography_lamps"
 
-#' @rdname incandescent_lamps
-"led_lamps"
-
-#' @rdname incandescent_lamps
-"mercury_lamps"
-
-#' @rdname incandescent_lamps
-"multimetal_lamps"
-
-#' @rdname incandescent_lamps
-"sodium_lamps"
-
-#' @rdname incandescent_lamps
-"xenon_lamps"
+#' @rdname photography_lamps
+"plant_grow_lamps"
