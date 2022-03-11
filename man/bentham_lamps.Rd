@@ -4,7 +4,9 @@
 \name{bentham_lamps}
 \alias{bentham_lamps}
 \title{Spectra acquired with Bentham spectrometer}
-\format{An object of class \code{character} of length 2.}
+\format{
+An object of class \code{character} of length 2.
+}
 \usage{
 bentham_lamps
 }

@@ -16,11 +16,10 @@ vignette: >
 knitr::opts_chunk$set(fig.width=8, fig.height=4)
 ```
 
-
 ## Introduction
 
 This package, is a data only package, part of a suite, which has package 
-'photobiology' at its core. Please visit (http://www.r4photobiology.info/) 
+'photobiology' at its core. Please visit (https://www.r4photobiology.info/) 
 for more details. For more details on plotting spectra, please consult the 
 documentation for package 'ggspectra', and for information on the calculation 
 of summaries and maths operations between spectra, please, consult the 
@@ -37,12 +36,13 @@ library(ggspectra)
 In this brief User Guide we describe how to re-scale the normalized
 spectra, and how to access individual spectra or subsets of spectra.
 
-Spectra in the package are contained in three collections: `lamps.mspct` contains
-spectral data for various types of lamps emiiting a fixed color of light; `ledsavers.mspct` contains spectral data for a LED bulb with four color
-channels allowing it to output 16 different _colors_ of light; 
-`qp_uvb313_temp.mspct` contains spectral data for UV lamps under seven
-different temperatures. In addition `qp_uvb313_temp.spct` contains the same
-data in a single spectral object.
+Spectra in the package are contained in three collections: `lamps.mspct`
+contains spectral data for various types of lamps emiiting a fixed color of
+light; `ledsavers.mspct` contains spectral data for a LED bulb with four color
+channels allowing it to output 16 different _colors_ of light;
+`qp_uvb313_temp.mspct` contains spectral data for UV lamps under seven different
+temperatures. In addition `qp_uvb313_temp.spct` contains the same data in a
+single spectral object.
 
 In addtion to the objects containing the data itself, several character vectors 
 of names of spectra are provide to facilitate the retrieval of subsets of spectra.
@@ -60,15 +60,17 @@ listed with method `names()`.
 names(lamps.mspct)
 ```
 
-We can use a character string as index to extract an individual `source_spct`
+We can use a name as index to extract an individual `source_spct`
 object.
 
 ```{r}
-lamps.mspct$incandescent.60w
+lamps.mspct$Generic.Inc.bulb.60W
 ```
 
+Or a character string.
+
 ```{r}
-lamps.mspct[["incandescent.60w"]]
+lamps.mspct[["Generic.Inc.bulb.60W"]]
 ```
 
 Be aware that according to R's rules, using single square brackets will return
@@ -76,7 +78,7 @@ a `source_mspct` object possibly of length one. This statement is not equivalent
 to the one in the chunk immediately above.
 
 ```{r}
-lamps.mspct["incandescent.60w"]
+lamps.mspct["Generic.Inc.bulb.60W"]
 ```
 
 ## Accessing subsets of spectra
@@ -87,7 +89,7 @@ define their own, either as constants or through computation. Here we use
 a vector defined by the package.
 
 ```{r}
-lamps.mspct[toshiba_lamps]
+lamps.mspct[Toshiba_lamps]
 ```
 
 And below we use a computed one. In this case we extract the member spectra
@@ -95,79 +97,132 @@ with names containing the string "toshiba". More generaly one can search for
 matching names within the collection of spectra.
 
 ```{r}
-lamps.mspct[grep("toshiba", names(lamps.mspct))]
+lamps.mspct[grep("Toshiba", names(lamps.mspct))]
 ```
 
 Set algebra operations can be used with the indexing vectors as each vector
 describes a single property: color, brand, type, etc.
 
 ```{r}
-lamps.mspct[intersect(philips_lamps, red_lamps)]
+lamps.mspct[intersect(Philips_lamps, red_lamps)]
 ```
 
-## Calculating summaries from the normalized data
+## Rescaling spectral data
 
 The spectra are normalized, and consequently, several summaries expressed in
 absolute units are undefined, and trigger errors. Summaries like ratios which
 are not affected by normalization are allowed and valid. The data have been
 normalized as the measuring conditions used are not all the same, and in many
-cases not well characterized (e.g. distance to nearby reflecting walls, or exact 
-alignment of the spectrometer input optics with respect to light sources).
+cases not well characterized (e.g. distance to light source, or exact 
+alignment of the spectrometer input optics with respect to the center of the
+light beam from sources).
 
-What we will do in this section is to rescale the spectral data so that after 
-conversion a given target value for a summary quantity will be true. As an 
+These uncertainties in the measurment conditions are likely to have minimal effect
+on the shape of the spectrum when plotted. This allows us to reconstruct the
+spectrum at a different distance from the lamp(s) or under a different number of 
+lamps as long as we know the irradiance for some known waveband, such as PAR. 
+
+In this section we will rescale the spectral data so that after 
+re-scaling a given target value for a summary quantity will be true. As an 
 example, we will rescale one spectrum so that it yields an energy irradiance of
-100 W m-2 for the range 400 to 700 nm.
+100 W m-2 for the range 400 to 700 nm. By default the returned spectrum is not
+labelled as being expressed in relative units, as the expectation is that the
+operation is done to obtain spectral emission data that could have been measured
+at a target condition that we want to simulate or reconstruct.
 
 ```{r}
-my.spct <- fscale(lamps.mspct$incandescent.60w,
+my.spct <- fscale(lamps.mspct$Generic.Inc.bulb.60W,
                   range = c(400, 700),
-                  e_irrad,
+                  f = e_irrad,
                   target = 100
                   )
 e_irrad(my.spct, waveband(c(400,700)))
 ```
 
-If we want to treat the rescaled spectral data, as if they were true readings
-with no scaling we can reset the attribute with method `setScaled()`. With 
-method `getScaled()` we can test if a spectrun has been scaled.
-
 ```{r}
-getScaled(my.spct)
+is_scaled(my.spct)
 ```
 
-If for some obscure reason we want to simply "pretend" that the spectral data
-have not been normalized, we can permanently override the attribute on a copy 
-of the data. Most of the time this is a very bad idea!
+To do the scaling based on photon irradiance, different approaches are available to change the default. Here as above we specify the function to use through the argument passed to `f` and set a suitable target in mol m-2 s-1. We use 300e-6 to indicate 300 umol m-2 s-1.
 
 ```{r}
-my.lamp <- lamps.mspct$incandescent.60w
-setNormalized(my.lamp)
-e_irrad(my.lamp)
+my.spct <- fscale(lamps.mspct$Generic.Inc.bulb.60W,
+                  range = c(400, 700),
+                  f = q_irrad,
+                  target = 300e-6
+                  )
+q_irrad(my.spct, waveband(c(400,700)))
+
 ```
 
-As mentioned above, ratios can be calculated directly as they are not affected
-by normalization.
+In the special case when `target == 1`, the default changes, assuming that
+in this case the intention is to re-express the spectral data in relative units.
 
 ```{r}
-q_ratio(lamps.mspct$incandescent.60w, Red("Smith10"), Far_red("Smith10"))
+my.spct <- fscale(lamps.mspct$Generic.Inc.bulb.60W,
+                  range = c(400, 700),
+                  f = e_irrad,
+                  target = 1
+                  )
+is_scaled(my.spct)
+```
+
+If we want to override the defaults for tagging as scaled, we ccan pass a
+suitable argument to parameter `set.scaled` of `fscale()`.
+
+In addition to scaling based of the summary calculated by a function, as shown
+above, it is frequent to _normalize_ spectral data. In this case scaling is
+done so that spectral irradiance matches a certain value at an specific
+wavelength. In most cases, the wavelength used is that of the maximal spectral 
+irradiance, and the target value is 1. These are the defaults and in this case
+the returned spectra are always labeled as being normalized. We use a blue
+fluorescent tube for this example.
+
+```{r}
+normalize(lamps.mspct$Philips.FT.TLD.36W.15)
+```
+
+Ratios can be calculated directly as they are not affected
+by normalization or linear rescaling.
+
+```{r}
+q_ratio(my.spct, Red("Smith10"), Far_red("Smith10"))
 ```
 
 ## Plotting the spectra
 
-Using `plot()` methods for spectra defined in package 'ggspectra' annotated plotting is automatic. The defaults can be easily changed, please see the documentation
-in package 'ggspectra'.
+Using `autoplot()` methods for spectra defined in package 'ggspectra' annotated
+plotting are created with automatically genrateda xis labels, annotations and
+decorations. The defaults can be easily changed, please see the documentation in
+package 'ggspectra'. For most of the data included in the package, as told
+above, exact alignment was not ensured and the exact distance not recorded. In
+such cases the data included in the package have been normalized to 1 at the
+tallest peak of emission, as can be seen in the example below.
 
 ```{r}
-plot(lamps.mspct$osram.led.8w.2700k)
+autoplot(lamps.mspct$Osram.LED.8W.2700K)
 ```
+
+Data for a four channel, remote controlled, LED bulb is included in object 
+`ledsavers.mspct`. 
 
 ```{r}
-plot(ledsavers.mspct$purple)
+what_measured(ledsavers.mspct$purple)
+how_measured(ledsavers.mspct$purple)
 ```
 
-Using the `ggplot()` method for spectra from package 'ggspectra' plus _geometries_
-and _statistics_ from package 'ggplot2' we gain additional control on the design.
+In this case, data are not normalized, as all spectra in the object have been
+measure with the lamp and entrance optics in exactly the same position,
+controlling emission with wireless remote controller. In the next example we see
+that _purple_ is created as a mix of blue and red light.
+
+```{r}
+autoplot(ledsavers.mspct$purple)
+```
+
+Using the `ggplot()` method for spectra from package 'ggspectra' plus
+_geometries_ and _statistics_ from package 'ggplot2' we gain additional control
+on the design.
 
 ```{r}
 ggplot(ledsavers.mspct$purple) +
@@ -175,31 +230,45 @@ ggplot(ledsavers.mspct$purple) +
   theme_classic()
 ```
 
-## Using the data in other contexts
+We can also plot multiple spectra. In this example we plot the pure emission
+from each of the four channels of the bulb.
 
-As `source_spct` is a class derived from `list`, and `source_spct` is derived from
-`tibble::tible` which is a compatible reimplementation of `data.frame` the
-data can be used very easily with any R function.
 
 ```{r}
-head(as.data.frame(lamps.mspct$incandescent.60w))
+autoplot(ledsavers.mspct[c( "W", "R", "G", "B")],
+         annotations = c("+", "title:what")) +
+  labs(linetype = "Channel")
+```
+
+## Using the data in other contexts
+
+In general it will be easiest to use methods from packages in the
+'r4photobiology' suite for plotting and calculation of various summaries.
+However, as `source_mspct` is a class derived from `list`, and `source_spct` is
+derived from `tibble::tibble` that is a partly compatible reimplementation of
+`data.frame` the data can be used very easily with R functions expecting data
+frames as input.
+
+```{r}
+head(as.data.frame(lamps.mspct$Osram.LED.8W.2700K))
 ```
 
 Of course `attach` and `with` also work as expected.
+
 ```{r}
 attach(lamps.mspct)
-q_ratio(incandescent.60w, Blue(), Red())
+q_ratio(Osram.LED.8W.2700K, Blue(), Red())
 detach(lamps.mspct)
 ```
 
 ```{r}
 attach(lamps.mspct)
-with(incandescent.60w, max(w.length))
+with(Osram.LED.8W.2700K, max(w.length))
 detach(lamps.mspct)
 ```
 
 ```{r}
-with(lamps.mspct, q_ratio(incandescent.60w, Blue(), Red()))
+with(lamps.mspct, q_ratio(Osram.LED.8W.2700K, Blue(), Red()))
 ```
 
 

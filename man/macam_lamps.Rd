@@ -4,7 +4,9 @@
 \name{macam_lamps}
 \alias{macam_lamps}
 \title{Spectra acquired with Macam SR-9010-PC}
-\format{A vector of character strings.}
+\format{
+A vector of character strings.
+}
 \usage{
 macam_lamps
 }
@@ -30,6 +32,6 @@ macam_lamps
 Aphalo, P J, R Tegelberg, and R Julkunen-Tiitto. 1999. The
   Modulated UV-B Irradiation System at the University of Joensuu. Biotronics
   28: 109-120.
-  \url{http://ci.nii.ac.jp/naid/110006175827/en}.
+  \url{https://ci.nii.ac.jp/naid/110006175827/en}.
 }
 \keyword{datasets}

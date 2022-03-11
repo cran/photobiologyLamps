@@ -6,7 +6,8 @@
 \alias{temperatures}
 \alias{qp_uvb313_temp.mspct}
 \title{Spectral irradiance of UVB lamps at different temperatures.}
-\format{\code{qp_uvb313_temp.spct} is a \code{"source_spct"} object with 777 rows (290 nm to 400 nm, 1.0 nm step) and 3
+\format{
+\code{qp_uvb313_temp.spct} is a \code{"source_spct"} object with 777 rows (290 nm to 400 nm, 1.0 nm step) and 3
   variables.
 
 The variables are as follows:
@@ -25,7 +26,10 @@ The variables in the member spectra are as follows:
 \itemize{
   \item w.length (nm)
   \item s.e.irrad (W m-2 nm-1)
-}}
+}
+
+An object of class \code{source_mspct} (inherits from \code{generic_mspct}, \code{list}) with 7 rows and 1 columns.
+}
 \usage{
 qp_uvb313_temp.spct
 
@@ -66,6 +70,6 @@ qp_uvb313_temp.mspct[["plus20C"]]
 Aphalo, P J, R Tegelberg, and R Julkunen-Tiitto. 1999. The
 Modulated UV-B Irradiation System at the University of Joensuu. Biotronics
 28: 109–120.
-\url{http://ci.nii.ac.jp/naid/110006175827/en}.
+\url{https://ci.nii.ac.jp/naid/110006175827/en}.
 }
 \keyword{datasets}

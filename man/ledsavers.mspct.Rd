@@ -9,13 +9,25 @@
 \alias{ledsavers_RB_mixes}
 \alias{ledsavers_GB_mixes}
 \title{Spectra for a multichannel LED bulb}
-\format{\code{ledsavers.mspct} is a \code{"source_mspct"} object containing 
+\format{
+\code{ledsavers.mspct} is a \code{"source_mspct"} object containing 
   a collection of 16 \code{"source_spct"} objects as members. Members are
   named.
   
 \code{ledsavers_channels}, \code{ledsavers_mixes}, \code{ledsavers_RG_mixes},
 \code{ledsavers_RB_mixes}, \code{ledsavers_GB_mixes} are character vectors
-containing subsets of \code{names(ledsavers.mspct)}.}
+containing subsets of \code{names(ledsavers.mspct)}.
+
+An object of class \code{character} of length 4.
+
+An object of class \code{character} of length 12.
+
+An object of class \code{character} of length 4.
+
+An object of class \code{character} of length 4.
+
+An object of class \code{character} of length 4.
+}
 \usage{
 ledsavers.mspct
 
@@ -71,6 +83,6 @@ ledsavers.mspct[ledsavers_channels]
 
 }
 \references{
-\url{http://www.ledsavers.com/}
+\url{https://www.kjell.com/varumarken/ledsavers}
 }
 \keyword{datasets}

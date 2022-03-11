@@ -4,7 +4,9 @@
 \name{licor_lamps}
 \alias{licor_lamps}
 \title{Spectra acquired with LI-COR LI-1800}
-\format{A vector of character strings.}
+\format{
+A vector of character strings.
+}
 \usage{
 licor_lamps
 }
