@@ -1,7 +1,7 @@
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 knitr::opts_chunk$set(fig.width=8, fig.height=4)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 library(photobiology)
 library(photobiologyWavebands)
 library(photobiologyLamps)

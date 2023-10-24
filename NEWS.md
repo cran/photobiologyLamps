@@ -4,6 +4,11 @@ editor_options:
     wrap: sentence
 ---
 
+photobiologyLamps 0.5.2
+=======================
+
+* Rebuild data objects with 'photobiology' (== 0.11.0), ensuring that metadata about the normalization is complete.
+
 photobiologyLamps 0.5.1
 =======================
 
